@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Neopets Daily Quest Helper
 // @namespace    http://tampermonkey.net/
-// @version      1.2
+// @version      1.3
 // @description  Add a "Go!" button to aid your daily questing
 // @author       Harvey
 // @match        https://www.neopets.com/questlog/
@@ -29,6 +29,8 @@ GM_addStyle (`
     }`);
 function adjustDailyChunks()
 {
+    // Only activate when on the 'Daily Quests' tab
+    if (sessionStorage.tabActive != 2) return;
     var results = document.getElementsByClassName("questlog-quest");
     for (var i = 0; i < results.length; i++)
     {
@@ -92,7 +94,15 @@ function turnQuestTypeToLink(questText)
     return "/inventory.phtml";
 }
 
-adjustDailyChunks();
+function observeChanges()
+{
+    // The div is now blank on page load. Create a MutationObserver to detect changes.
+    const targetNode = document.getElementById("QuestLogContent");
+    const config = { childList: true };
+    const contentObserver = new MutationObserver(adjustDailyChunks);
+    contentObserver.observe(targetNode, config);
+}
+observeChanges();
 
 
 function GM_addStyle(css) {
