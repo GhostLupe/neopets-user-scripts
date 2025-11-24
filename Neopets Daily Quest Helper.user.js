@@ -90,7 +90,26 @@ function turnQuestTypeToLink(questText)
     {
         return("/customise.phtml");
     }
-
+    else if (quest.includes("battledome"))
+    {
+        return("/dome.phtml");
+    }
+    else if (quest.includes("vortex"))
+    {
+        return("/water/fishing.phtml");
+    }
+    else if (quest.includes("wearable"))
+    {
+        return("/mall.phtml");
+    }
+    else if (quest.includes("popular"))
+    {
+        return("/mall.phtml");
+    }
+    else if (quest.includes("trip"))
+    {
+        return("/mall.phtml");
+    }
     return "/inventory.phtml";
 }
 
