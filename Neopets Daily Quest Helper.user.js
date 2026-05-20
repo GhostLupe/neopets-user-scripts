@@ -59,57 +59,20 @@ function adjustDailyChunks()
 function turnQuestTypeToLink(questText)
 {
     var quest = questText.toLowerCase();
-    if (quest.includes("wheel"))
-    {
-        if(quest.includes("mediocrity"))
-        {
-            return "/prehistoric/mediocrity.phtml";
-        }
-        else if (quest.includes("excitement"))
-        {
-            return ("/faerieland/wheel.phtml");
-        }
-        else if (quest.includes("misfortune"))
-        {
-            return ("/halloween/wheel/index.phtml");
-        }
-        else if (quest.includes("knowledge"))
-        {
-            return ("/medieval/knowledge.phtml");
-        }
+    if (quest.includes("wheel")) {
+        if (quest.includes("mediocrity")) return "/prehistoric/mediocrity.phtml";
+        if (quest.includes("excitement")) return "/faerieland/wheel.phtml";
+        if (quest.includes("misfortune")) return "/halloween/wheel/index.phtml";
+        if (quest.includes("knowledge")) return "/medieval/knowledge.phtml";
     }
-    else if (quest.includes("purchase"))
-    {
-        return ("/generalstore.phtml");
-    }
-    else if (quest.includes("game"))
-    {
-        return ("/games.phtml");
-    }
-    else if (quest.includes("customise"))
-    {
-        return("/customise.phtml");
-    }
-    else if (quest.includes("battledome"))
-    {
-        return("/dome.phtml");
-    }
-    else if (quest.includes("vortex"))
-    {
-        return("/water/fishing.phtml");
-    }
-    else if (quest.includes("wearable"))
-    {
-        return("/mall.phtml");
-    }
-    else if (quest.includes("popular"))
-    {
-        return("/mall.phtml");
-    }
-    else if (quest.includes("trip"))
-    {
-        return("/mall.phtml");
-    }
+    if (quest.includes("purchase")) return "/generalstore.phtml";
+    if (quest.includes("game")) return "/games.phtml";
+    if (quest.includes("customise")) return "/customise.phtml";
+    if (quest.includes("battledome")) return "/dome/";
+    if (quest.includes("fish")) return "/water/fishing.phtml";
+    if (quest.includes("wearable")) return "/mall.phtml";
+    if (quest.includes("popular")) return "//ncmall.neopets.com/mall/search.phtml?type=popular_items";
+    if (quest.includes("trip")) return "/mall.phtml";
     return "/inventory.phtml";
 }
 
