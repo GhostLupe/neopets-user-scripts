@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Neopets Daily Quest Helper
 // @namespace    http://tampermonkey.net/
-// @version      1.3
+// @version      1.5
 // @description  Add a "Go!" button to aid your daily questing
 // @author       Harvey
 // @match        https://www.neopets.com/questlog/
@@ -30,7 +30,8 @@ GM_addStyle (`
 function adjustDailyChunks()
 {
     // Only activate when on the 'Daily Quests' tab
-    if (sessionStorage.tabActive != 2) return;
+    const activeTab = document.querySelector(".questlog-tab.tab-active");
+    if(!activeTab.classList.contains("tab-2")) return;
     var results = document.getElementsByClassName("questlog-quest");
     for (var i = 0; i < results.length; i++)
     {
@@ -51,8 +52,6 @@ function adjustDailyChunks()
         linkWrapper.appendChild(helpButton);
 
         buttons.appendChild(linkWrapper);
-
-
     }
 }
 
@@ -69,22 +68,25 @@ function turnQuestTypeToLink(questText)
     if (quest.includes("game")) return "/games.phtml";
     if (quest.includes("customise")) return "/customise.phtml";
     if (quest.includes("battledome")) return "/dome/";
-    if (quest.includes("fish")) return "/water/fishing.phtml";
+    if (quest.includes("vortex")) return "/water/fishing.phtml";
     if (quest.includes("wearable")) return "/mall.phtml";
     if (quest.includes("popular")) return "//ncmall.neopets.com/mall/search.phtml?type=popular_items";
     if (quest.includes("trip")) return "/mall.phtml";
+    if (quest.includes("omelette")) return "/prehistoric/omelette.phtml";
+    if (quest.includes("discard")) return "/inventory.phtml";
     return "/inventory.phtml";
 }
 
 function observeChanges()
 {
     // The div is now blank on page load. Create a MutationObserver to detect changes.
-    const targetNode = document.getElementById("QuestLogContent");
+    const targetNode = document.getElementById("QuestLogQuests");
     const config = { childList: true };
     const contentObserver = new MutationObserver(adjustDailyChunks);
     contentObserver.observe(targetNode, config);
 }
 observeChanges();
+adjustDailyChunks();
 
 
 function GM_addStyle(css) {
