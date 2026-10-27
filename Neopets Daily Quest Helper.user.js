@@ -74,6 +74,7 @@ function turnQuestTypeToLink(questText)
     if (quest.includes("trip")) return "/mall.phtml";
     if (quest.includes("omelette")) return "/prehistoric/omelette.phtml";
     if (quest.includes("discard")) return "/inventory.phtml";
+    if (quest.includes("interest")) return "/bank.phtml";
     return "/inventory.phtml";
 }
 
